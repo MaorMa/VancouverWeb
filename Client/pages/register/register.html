@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="../../myApp">
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <!--Register-->
+    <div id="register" class="part" ng-init="init()">
+        <form id="registerForm" name="registerForm" ng-submit="register()">
+            <div class="container">
+                <h1>Register</h1>
+                <hr>
+                <input type="text" id="first_name_input" placeholder="First name" ng-model="fname" required>
+                <br>
+                <span id="first_name_error" class="error_notification"></span>
+                <input type="text" id="last_name_input" placeholder="Last name" ng-model="lname" required>
+                <br>
+                <input type="text" id="city" placeholder="Enter city" ng-model="city" required>
+                <br>
+                <span id="city_error" class="error_notification"></span>
+                <label><b>Country</b></label>
+                <br>
+                <select ng-model="selectedCountry" ng-options="x for x in countries" required></select>
+                <br>
+                <span id="country_error" class="error_notification"></span>
+                <br>
+                <input type="email" id="email_input" placeholder="Enter Email" ng-model="email" required>
+                <br>
+                <br>
+                <label><b>InterestSubject one</b></label>
+                <br>
+                <select ng-model="interest1" ng-options="y for y in interests" required></select>
+                <br>
+                <br>
+                <label><b>InterestSubject two</b></label>
+                <br>
+                <select ng-model="interest2" ng-options="y for y in interests" required></select>
+                <br>
+                <span id="InterestSubjects_error" class="error_notification"></span>
+                <br>
+                <label><b>Question1</b></label>
+                <br>
+                <select ng-model="q1" ng-options="y.Question for y in Questions" required></select>
+                <br>
+                <span id="question1_error" class="error_notification"></span>
+                <br>
+                <input type="text" id="verifictionAnswer1" placeholder="verifictionAnswer1"
+                    ng-model="verifictionAnswer1" required>
+                <br>
+                <span id="verifictionAnswer1_error" class="error_notification"></span>
+                <label><b>Question2</b></label>
+                <br>
+                <select ng-model="q2" ng-options="y.Question for y in Questions" required></select>
+                <br>
+                <span id="question2_error" class="error_notification"></span>
+                <br>
+                <input type="text" id="verifictionAnswer2" placeholder="verifictionAnswer2"
+                    ng-model="verifictionAnswer2" required>
+                <br>
+                <span id="verifictionAnswer2_error" class="error_notification"></span>
+                <input type="text" id="user_name_input" placeholder="Enter Username" name="uname" ng-model="uname"
+                    required ng-minlength="3" ng-maxlength="8" ng-pattern="/^[a-zA-Z]*$/">
+                <span ng-show="registerForm.uname.$error.minlength" style="color: brown;font-weight: bold">Minimum
+                    length is 3 </span>
+                <span ng-show="registerForm.uname.$error.maxlength" style="color: brown;font-weight: bold">Maximum
+                    length is 8 </span>
+                <span ng-show="registerForm.uname.$error.pattern" style="color: brown;font-weight: bold">username must
+                    contain only characters</span>
+                <br>
+                <input type="password" id="password_input" placeholder="Enter Password" name="psw" ng-model="psw"
+                    required ng-minlength="5" ng-pattern="/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/" ng-maxlength="10">
+                <span ng-show="registerForm.psw.$error.minlength" style="color: brown;font-weight: bold">Minimum
+                    length is 5 </span>
+                <span ng-show="registerForm.psw.$error.maxlength" style="color: brown;font-weight: bold">Maximum
+                    length is 10 </span>
+                <span ng-show="registerForm.psw.$error.pattern" style="color: brown;font-weight: bold">Password must contain digits and characters </span>
+                <br>
+                <span id="password_error" class="error_notification"></span>
+                <button class="btn btn-primary" ng-disabled="registerForm.$invalid" type="submit"
+                    value="Register">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

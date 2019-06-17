@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Favorites</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="sortByRank1">
+            <button class="btn btn-primary" ng-click="sortByRank()">Sort by rank</button>
+        </div>
+        <div id="sortByCategory1">
+            <button class="btn btn-primary" ng-click="sortByCategory()">Sort by Category</button>
+        </div>
+        <button class="btn btn-primary" ng-click="saveFavOrder()">Save Favorite order</button>
+        <div id="details" ng-show="infoVisible">
+            <p><b>Point Name:</b>
+                {{currFullPoi.PointName}}</p>
+            <p><b>Point Category:</b>
+                {{currFullPoi.PointCategory}}</p>
+            <p><b>Point Rating:</b>
+                {{currFullPoi.PointRating /5 * 100}} %</p>
+            <p><b>Point Description:</b>
+                <br>{{currFullPoi.Description}}</p>
+            <p><b>Point AmountOfViewers:</b>
+                {{currFullPoi.Viewers}}</p>
+            <p><b>Point Reviews:</b>
+                <div ng-repeat="Review in currFullPoi.Reviews">
+                    <p><i>Comment:</i> {{Review.Review}}</p>
+                    <p><i>Time:</i> {{Review.Time}}</p>
+                    <hr>
+                </div>
+                <!-- <br> {{currFullPoi.Reviews}}</p> -->
+                <modal ng-show="loggedIn" id="addReview">
+                    <div id="container">
+                        <button class="btn btn-primary" ng-click="$root.show_me =!$root.show_me"> Add Rank&Review</button>
+                        <br>
+                        <select type="number" value ng-show="show_me" id="rank" ng-options="y for y in ranks"
+                            ng-model="$root.rank" required></select>
+                        <br>
+                        <textarea id="TextReview" style="width: 80% ; height: 40%" ng-show="show_me" placeholder="Insert Review"
+                            ng-model="$root.TextReview" required></textarea>
+                        <br>
+                        <button class="btn btn-primary" ng-show="show_me"
+                            ng-click="addReview(rank,TextReview)">Save</button>
+                    </div>
+                </modal>
+        </div>
+
+        <div id="favorites" ng-repeat="fav in favorites" style="width: 300px">
+            <input ng-show="loggedIn" ng-style="getStyle(fav)" ng-click="changeFav(fav)" type="button" />
+            <div ng-click="showDetails(fav)">
+                <p>{{fav.PointName}}</p>
+                <img ng-src="{{fav.ImageObj}}" class="img-responsive" style="margin-bottom: 10px" height="150px"
+                    width="150px" />
+            </div>
+            <div id="arrows">
+                <input id="upArrow" style="margin-bottom: 15px ; margin-top: 20px " ng-click="goUp(fav)" value="&#8593;" type="button" />
+                <input id="downArrow" ng-click="goDown(fav)" value="&#8595;" type="button" />
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

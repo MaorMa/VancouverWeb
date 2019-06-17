@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="../../myApp">
+
+<head>
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!--Register-->
+    <div id="poi" class="part" ng-init="getAllCategories()">
+        <div class="container">
+            <div id="category">
+                Choose Category:
+                <select ng-model="selectedCategory" ng-change="filterByCategory()">
+                    <option ng-repeat="category in categories">{{category}}</option>
+                </select>
+            </div>
+            <div id="search">
+                <form ng-submit="filterByName()">
+                    <input type="text" placeholder="Search Point by Name" ng-model="searcValue"
+                        ng-change="getPartName()">
+                    <div ng-show="searcValue.PointName == poi.PointName" ng-repeat="poi in pointsToShow">
+                    </div>
+                </form>
+                <div id="sortByRank">
+                    <button class="btn btn-primary" ng-click="sortByRank()">Sort by rank</button>
+                </div>
+            </div>
+
+            <h1>Point of Interests</h1>
+            <p ng-show="!results">No Results</p>
+            <div id="imageAndDetails">
+                <div id="details" style="font-size: 16px" ng-show="infoVisible">
+                    <p><b>Point Name:</b>
+                        {{currFullPoi.PointName}}</p>
+                    <p><b>Point Category:</b>
+                        {{currFullPoi.PointCategory}}</p>
+                    <p><b>Point Rating:</b>
+                        {{currFullPoi.PointRating /5 * 100}} %</p>
+                    <p><b>Point Description:</b>
+                        <br>{{currFullPoi.Description}}</p>
+                    <p><b>Point AmountOfViewers:</b>
+                        {{currFullPoi.Viewers}}</p>
+                    <p><b>Point Reviews:</b>
+                        <div ng-repeat="Review in currFullPoi.Reviews">
+                            <p><i>Comment:</i> {{Review.Review}}</p>
+                            <p><i>Time:</i> {{Review.Time}}</p>
+                        </div>
+                        <!-- <br> {{currFullPoi.Reviews}}</p> -->
+                        <modal ng-show="loggedIn" id="addReview">
+                            <div id="container">
+                                <button class="btn btn-primary" ng-click="$root.show_me =!$root.show_me"> Add Rank&Review</button>
+                                <br>
+                                <select type="number" value value="Rank" ng-show="show_me" id="rank" ng-options="y for y in ranks"
+                                    ng-model="$root.rank" required>Rank</select>
+                                <br>
+                                <textarea id="TextReview" style="width: 80% ; height: 40%" ng-show="show_me"
+                                    placeholder="Insert Review" ng-model="$root.TextReview" required></textarea>
+                                <br>
+                                <button class="btn btn-primary" ng-show="show_me"
+                                    ng-click="addReview(rank,TextReview)">Save</button>
+                            </div>
+                        </modal>
+                </div>
+                <div id="poiImages" ng-repeat="category in categories" ng-if="category != 'All' ">
+                    <br>
+                    <br>
+                    <div id=categoryName ng-show="category==selectedCategory || selectedCategory=='All'">
+                        <b>
+                            <p style="font-size: 28px">
+                                Category Name: {{category}}</p>
+                        </b>
+                        <hr>
+                    </div>
+                    <div style="width: 300px">
+                        <div id="poiImages" ng-repeat="poi in pointsToShow">
+                            <div id="data">
+                                <input ng-show="loggedIn" ng-style="getStyle(poi)" ng-if="poi.PointCategory==category"
+                                    ng-click="changeFav(poi)" type="button" />
+                                <div ng-if="poi.PointCategory==category" id="imageAndName" ng-click="showDetails(poi)">
+                                    <p>{{poi.PointName}}</p>
+                                    <img ng-src="{{poi.ImageObj}}" class="img-responsive" style="margin-bottom: 10px"
+                                        height="150px" width="150px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

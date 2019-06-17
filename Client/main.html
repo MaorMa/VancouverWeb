@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title></title>
+    <!-- load angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+    <!-- css link -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- bootstrap link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<!-- body -->
+
+<body ng-controller="appCtrl" ng-init="initialize()">
+
+    <body>
+        <!-- load app -->
+        <script src="app.js"></script>
+
+        <!-- load controllers -->
+        <script src="pages/login/loginController.js"></script>
+        <script src="pages/register/registerController.js"></script>
+        <script src="pages/home/userHomeController.js"></script>
+        <script src="pages/login/forgotPasswordController.js"></script>
+        <script src="pages/poi/poiController.js"></script>
+        <script src="pages/home/homeController.js"></script>
+        <script src="pages/favorites/favoritesController.js"></script>
+        <script src="pages/about/aboutController.js"></script>
+        <script src="appCtrl.js"></script>
+        <!-- logo -->
+        <div id="logo">
+            <img src="" />
+        </div>
+        <!-- menu navbar -->
+        <div id="menu">
+            <nav class="navbar navbar-inverse bg-inverse">
+                <div ng-click="changeInfoVisible()" class="container">
+                    <a class="navbar-brand" id="logo"> Vancouver Advisor</a>
+                    <a ng-show="!loggedIn" class="navbar-brand" href="#!home">Home</a>
+                    <a ng-show="loggedIn" class="navbar-brand" href="#!userHome">Home</a>
+                    <a ng-show="!loggedIn" class="navbar-brand" href="#!login">Login</a>
+                    <a ng-show="!loggedIn" class="navbar-brand" href="#!register">Register</a>
+                    <a class="navbar-brand" href="#!about">About</a>
+                    <a ng-show="loggedIn" class="navbar-brand" href="#!favorites"> &#9829 ({{favorites.length}})</a>
+                    <a class="navbar-brand" href="#!poi">Point Of Interests</a>
+                    <a ng-show="loggedIn" class="navbar-brand" href="#!login" ng-click="logout()">Logout</a>
+                    <div id="hello">
+                        <span id="userIcon" class="glyphicon glyphicon-user">
+                        </span><a class="navbar-brand" id="hello" ng-model="currUser"> Hello {{currUser}}</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div ng-view></div>
+    </body>
+
+</html>
