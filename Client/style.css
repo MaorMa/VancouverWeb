@@ -101,6 +101,10 @@ html {
     background-image: url("img/form.jpg");
 }
 
+#forgotForm{
+    font-size: 20px;
+}
+
 #loginForm .container {
     top: 20px;
     position: relative;

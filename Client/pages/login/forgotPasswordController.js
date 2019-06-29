@@ -34,6 +34,7 @@ angular.module("myApp")
                 $timeout(redirect, 5000);
             })
             .catch(function (err) {
+                alert("Authenticaion Failure");  
                 console.log(err)
             })
         }
