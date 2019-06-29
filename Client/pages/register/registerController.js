@@ -57,13 +57,14 @@ angular.module("myApp")
                         }
                     })
                     .then(function (response) {
+                        alert("User created! Please log in...");
                         redirect.redirect("login");
                     })
                     .catch(function (err) {
-                        console.log($scope.interest1);
-                        console.log($scope.interest2);
+                        //console.log($scope.interest1);
+                        //console.log($scope.interest2);
                         alert("One of the fields is incorrect");
-                        console.log(err)
+                        //console.log(err)
                     })
             }
 

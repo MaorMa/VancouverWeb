@@ -99,6 +99,9 @@ angular.module('myApp')
                         $rootScope.TextReview = "";
                     })
                     .catch(function (err) {
+                        $window.alert("You already review this poi");
+                        $rootScope.rank = 0;
+                        $rootScope.TextReview = "";
                         console.log(err)
                     })
             }

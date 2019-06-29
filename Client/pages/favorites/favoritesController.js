@@ -61,6 +61,7 @@ angular.module("myApp")
 
         function saveAllFavs() {
             saveAllFavsIndex(0);
+            alert("Favorites order saved!");
         }
 
         function saveAllFavsIndex(index) {
